@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "vn.neolab.versioncontrolmvvm"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"https://api-dev.dmma.whotv.net/api/v1\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api-dev.dmma.whotv.net/api/v1\"")
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    //recycle view
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    //card view do ma
+    //noinspection GradleCompatible
+    implementation 'com.android.support:cardview-v7:27.1.1'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //life cycle
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    //calligraphy custom font
+//    implementation 'io.github.inflationx:calligraphy3:3.0.0'
+//    implementation 'io.github.inflationx:viewpump:1.0.0'
+
+    //dagger 2
+    implementation 'com.google.dagger:dagger-android:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.16'
+    // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-compiler:2.16"
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
+    //android fast networking
+    implementation 'com.amitshekhar.android:rx2-android-networking:1.0.1'
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.5'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    //timber
+    implementation 'com.jakewharton.timber:timber:4.7.0'
+}

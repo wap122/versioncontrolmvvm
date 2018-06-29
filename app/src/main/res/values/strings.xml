@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VersionControlProject</string>
+    <string name="text_version">Version:</string>
+    <string name="text_build">Build:</string>
+    <string name="text_time">Time:</string>
+
+    <string name="download">Download</string>
+    <string name="toast1">App sẽ hoạt động full chức năng nhé</string>
+    <string name="toast2">Không cho quyền thì app chạy ko dc đâu :(</string>
+    <string name="detail_title">iPhone版 - 評価用アプリ</string>
+    <string name="dmm_auto">DMM Auto</string>
+    <string name="detail_desc">※ ダウンロードする前に、古いバージョンのアプリの削除をお願いします。</string>
+</resources>
