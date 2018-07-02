@@ -125,7 +125,7 @@ public class VersionResponse {
     }
 
 
-    public class Version implements Serializable {
+    public static class Version implements Serializable {
 
         @SerializedName("id")
         @Expose
@@ -160,6 +160,20 @@ public class VersionResponse {
         @SerializedName("app_url")
         @Expose
         private String appUrl;
+
+        public Version(Integer id, String env, String uuid, String ipaS3Key, String plistS3Key, String version, String build, Integer isLatestVersion, Integer deviceType, String createdAt, String appUrl) {
+            this.id = id;
+            this.env = env;
+            this.uuid = uuid;
+            this.ipaS3Key = ipaS3Key;
+            this.plistS3Key = plistS3Key;
+            this.version = version;
+            this.build = build;
+            this.isLatestVersion = isLatestVersion;
+            this.deviceType = deviceType;
+            this.createdAt = createdAt;
+            this.appUrl = appUrl;
+        }
 
         public Integer getId() {
             return id;

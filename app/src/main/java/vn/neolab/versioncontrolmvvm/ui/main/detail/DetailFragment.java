@@ -1,5 +1,7 @@
 package vn.neolab.versioncontrolmvvm.ui.main.detail;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,13 +14,18 @@ import javax.inject.Inject;
 import vn.neolab.versioncontrolmvvm.R;
 import vn.neolab.versioncontrolmvvm.databinding.FragmentDetailBinding;
 import vn.neolab.versioncontrolmvvm.ui.base.BaseFragment;
+import vn.neolab.versioncontrolmvvm.ui.main.MainNavigator;
 
-public class DetailFragment extends BaseFragment<FragmentDetailBinding, DetailViewModel> implements DetailNavigator {
+public class DetailFragment extends BaseFragment<FragmentDetailBinding, DetailViewModel> implements
+        DetailNavigator {
 
-    public static final String VERSION = "VERSION";
+    public static final String VERSION = "version";
 
     @Inject
-    DetailViewModel mDetailViewModel;
+    ViewModelProvider.Factory mViewModelFactory;
+
+    @Inject
+    MainNavigator mMainNavigator;
 
     FragmentDetailBinding mBinding;
 
@@ -34,18 +41,23 @@ public class DetailFragment extends BaseFragment<FragmentDetailBinding, DetailVi
 
     @Override
     public DetailViewModel getViewModel() {
-        return mDetailViewModel;
+        return ViewModelProviders.of(this, mViewModelFactory).get(DetailViewModel.class);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDetailViewModel.setNavigator(this);
+        getViewModel().setNavigator(this);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mBinding = getViewDataBinding();
+        setup();
+    }
+
+    private void setup() {
+        mMainNavigator.changeBackButtonVisibility(true);
     }
 }

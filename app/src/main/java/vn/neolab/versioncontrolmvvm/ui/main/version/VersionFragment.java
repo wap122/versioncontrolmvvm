@@ -12,6 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import vn.neolab.versioncontrolmvvm.BR;
@@ -34,7 +37,6 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
     LinearLayoutManager mLinearLayoutManager;
 
     FragmentVersionBinding mFragmentVersionBinding;
-    VersionViewModel mVersionViewModel;
 
     @Override
     public int getBindingVariable() {
@@ -48,15 +50,14 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
 
     @Override
     public VersionViewModel getViewModel() {
-        mVersionViewModel = ViewModelProviders.of(this, mViewModelFactory)
+        return ViewModelProviders.of(this, mViewModelFactory)
                 .get(VersionViewModel.class);
-        return mVersionViewModel;
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mVersionViewModel.setNavigator(this);
+        getViewModel().setNavigator(this);
     }
 
     @Override
@@ -69,10 +70,10 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
     }
 
     private void subscribeToLiveData() {
-        mVersionViewModel.getVersionListLiveData().observe(this, list -> {
+        getViewModel().getVersionListLiveData().observe(this, list -> {
             Toast.makeText(getContext(), "Get version success", Toast.LENGTH_SHORT).show();
             mFragmentVersionBinding.swipeRl.setRefreshing(false);
-            mVersionViewModel.addVersionItemToList(list);
+            getViewModel().addVersionItemToList(list);
         });
     }
 
@@ -96,6 +97,14 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
 
     @Override
     public void handleError(Throwable throwable) {
+        VersionResponse.Version version = new VersionResponse.Version(1, "dev",
+                "aasd", "asdasd", "asdasd", "1", "2.3",
+                1, 2, "2 thang 9", "ahihi");
+
+        List<VersionResponse.Version> list = new ArrayList<>();
+        list.add(version);
+        getViewModel().addVersionItemToList(list);
+
         Toast.makeText(getContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
     }
 
@@ -103,12 +112,12 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
     public void onItemClick(VersionResponse.Version version) {
         Bundle args = new Bundle();
         args.putSerializable(DetailFragment.VERSION, version);
-        FragmentUtils.replaceFragment(DetailFragment.class, this, R.id.child_container,
+        FragmentUtils.replaceFragmentInFragment(DetailFragment.class, this, R.id.child_container,
                 true, args);
     }
 
     @Override
     public void onRefresh() {
-        mVersionViewModel.fetchVersion();
+        getViewModel().fetchVersion();
     }
 }

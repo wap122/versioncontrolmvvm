@@ -1,5 +1,6 @@
 package vn.neolab.versioncontrolmvvm.ui.main;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -14,5 +15,4 @@ public class MainActivityModule {
     MainViewModel provideMainViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         return new MainViewModel(dataManager, schedulerProvider);
     }
-
 }

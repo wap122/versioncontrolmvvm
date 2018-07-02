@@ -3,6 +3,8 @@ package vn.neolab.versioncontrolmvvm.utils;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,4 +30,11 @@ public class BindingUtils {
         Context context = imageView.getContext();
         Glide.with(context).load(id).into(imageView);
     }
+
+//    @BindingAdapter({"visibility"})
+//    public static void setVisibility(ImageButton imageButton, boolean isShow) {
+//        if (isShow) imageButton.setVisibility(View.VISIBLE);
+//        else imageButton.setVisibility(View.GONE);
+//    }
+
 }
