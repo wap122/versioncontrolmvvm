@@ -12,9 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import vn.neolab.versioncontrolmvvm.BR;
@@ -97,14 +94,15 @@ public class VersionFragment extends BaseFragment<FragmentVersionBinding, Versio
 
     @Override
     public void handleError(Throwable throwable) {
-        VersionResponse.Version version = new VersionResponse.Version(1, "dev",
-                "aasd", "asdasd", "asdasd", "1", "2.3",
-                1, 2, "2 thang 9", "ahihi");
+//        VersionResponse.Version version = new VersionResponse.Version(1, "dev",
+//                "aasd", "asdasd", "asdasd", "1", "2.3",
+//                1, 2, "2 thang 9", "ahihi");
+//
+//        List<VersionResponse.Version> list = new ArrayList<>();
+//        list.add(version);
+//        getViewModel().addVersionItemToList(list);
 
-        List<VersionResponse.Version> list = new ArrayList<>();
-        list.add(version);
-        getViewModel().addVersionItemToList(list);
-
+        mFragmentVersionBinding.swipeRl.setRefreshing(false);
         Toast.makeText(getContext(), throwable.toString(), Toast.LENGTH_SHORT).show();
     }
 

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.downloader.PRDownloader;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -96,11 +98,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         }
 
         return true;
-
     }
 
     @Override
     public void changeBackButtonVisibility(boolean isShow) {
         mMainViewModel.setShow(isShow);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PRDownloader.cancelAll();
     }
 }

@@ -5,6 +5,7 @@ import android.app.Application;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
+import com.downloader.PRDownloader;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import vn.neolab.versioncontrolmvvm.di.component.DaggerAppComponent;
+import vn.neolab.versioncontrolmvvm.utils.AppLogger;
 
 public class MvvmApp extends Application implements HasActivityInjector {
 
@@ -34,5 +36,7 @@ public class MvvmApp extends Application implements HasActivityInjector {
             AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
         }
 
+        PRDownloader.initialize(getApplicationContext());
+        AppLogger.init();
     }
 }
