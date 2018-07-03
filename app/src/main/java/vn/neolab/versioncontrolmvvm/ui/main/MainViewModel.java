@@ -11,13 +11,11 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
 
     public ObservableBoolean isShow = new ObservableBoolean(false);
 
-    private MutableLiveData<String> backEvent;
 
 //    private Callback
 
     public MainViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        backEvent = new MutableLiveData<>();
     }
 
     public void setShow(boolean isShow) {
@@ -25,10 +23,6 @@ public class MainViewModel extends BaseViewModel<MainNavigator> {
     }
 
     public void onBackClick() {
-        backEvent.setValue(null);
-    }
-
-    public MutableLiveData<String> getBackEvent() {
-        return backEvent;
+        getNavigator().onBackClick();
     }
 }

@@ -53,14 +53,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityMainBinding = getViewDataBinding();
+        mMainViewModel.setNavigator(this);
         setup();
         subscribeToLiveData();
     }
 
     private void subscribeToLiveData() {
-        getViewModel().getBackEvent().observe(this, fragmentName -> {
-            onBackClick();
-        });
     }
 
     private void setup() {
@@ -103,11 +101,5 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     public void changeBackButtonVisibility(boolean isShow) {
         mMainViewModel.setShow(isShow);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        PRDownloader.cancelAll();
     }
 }

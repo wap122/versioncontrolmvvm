@@ -110,12 +110,16 @@ public class DetailFragment extends BaseFragment<FragmentDetailBinding, DetailVi
         if (intent.resolveActivity(pm) != null) {
             startActivity(intent);
         }
-
-
     }
 
     @Override
     public void onError(Error error) {
         AppLogger.d(error.toString());
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        PRDownloader.cancelAll();
     }
 }

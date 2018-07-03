@@ -11,7 +11,6 @@ import vn.neolab.versioncontrolmvvm.ui.main.MainActivity;
 import vn.neolab.versioncontrolmvvm.ui.main.MainNavigator;
 import vn.neolab.versioncontrolmvvm.utils.rx.SchedulerProvider;
 
-import static vn.neolab.versioncontrolmvvm.ui.main.detail.DetailFragment.VERSION;
 
 @Module
 public class DetailFragmentModule {
@@ -22,7 +21,7 @@ public class DetailFragmentModule {
         DetailViewModel viewModel = new DetailViewModel(dataManager, schedulerProvider);
         if (fragment.getArguments() != null) {
             VersionResponse.Version version = (VersionResponse.Version) fragment.getArguments()
-                    .getSerializable(VERSION);
+                    .getSerializable(DetailFragment.VERSION);
             viewModel.setVersion(version);
         }
         return viewModel;
